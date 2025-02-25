@@ -68,7 +68,6 @@ public class ElectricalLineController {
         if ("ROLE_ADMIN".equals(user.getRole())) {
             adminId = user.getId();
         } else {
-            // For students, use the admin's id if available
             adminId = (user.getAdmin() != null) ? user.getAdmin().getId() : user.getId();
         }
         
