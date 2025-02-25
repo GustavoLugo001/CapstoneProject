@@ -47,12 +47,12 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-        	.cors(cors -> cors.configurationSource(corsConfigurationSource()))            .csrf(csrf -> csrf.disable()) // ✅ Disable CSRF (not needed for JWT)
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // ✅ Ensure JWT is stateless
+        	.cors(cors -> cors.configurationSource(corsConfigurationSource()))            .csrf(csrf -> csrf.disable()) //  Disable CSRF (not needed for JWT)
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Ensure JWT is stateless
             .authorizeHttpRequests(auth -> auth
             	.requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/api/login").permitAll()
-                .requestMatchers("/api/protected").hasAuthority("ROLE_ADMIN") // ✅ Ensure protected route works
+                .requestMatchers("/api/protected").hasAuthority("ROLE_ADMIN") 
                 .requestMatchers("/api/register").permitAll()
                 .requestMatchers("/api/trees/**", 
                 		"/api/water-lines/**",
@@ -61,7 +61,7 @@ public class SecurityConfig {
 
                 .anyRequest().authenticated()
             )
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // ✅ Ensure JWT filter runs before authentication
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) 
             .build();
     }
 
@@ -89,7 +89,6 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("https://localhost:3000", "http://localhost:3000"));
-        // If your React dev server is truly on HTTPS at port 3000
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
