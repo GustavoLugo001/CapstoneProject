@@ -80,7 +80,7 @@ def calculate_tree_age(planting_date, height, species):
         try:
             if isinstance(planting_date, str):  # Convert only if it's a string
                 planting_date = datetime.strptime(planting_date, "%Y-%m-%d").date()
-            age = (datetime.today().date() - planting_date).days // 365  # Convert days to years
+            age = (datetime.today().date() - planting_date).days 
         except ValueError:
             print(f"⚠ Invalid planting date format: {planting_date}")
             age = None
