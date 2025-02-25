@@ -12,14 +12,12 @@ const MapSearch = () => {
     if (!query) return;
 
     try {
-      // Use the Nominatim API for geocoding
       const response = await fetch(
         `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
       );
       const data = await response.json();
       if (data && data.length > 0) {
         const { lat, lon } = data[0];
-        // Fly the map to the found coordinates
         map.flyTo([parseFloat(lat), parseFloat(lon)], 13);
       } else {
         setError("No results found");
