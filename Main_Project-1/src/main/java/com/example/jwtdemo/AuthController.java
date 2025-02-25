@@ -36,14 +36,16 @@ public class AuthController {
         this.jwtService = jwtService;
         this.userRepository = userRepository;
     }
+//test to assure that the back-end was function and security measures were not acting up.
     @GetMapping("/test")
     public String testEndpoint() {
         return "This is a public test endpoint.";
     }
 
+//This is not being used when trying to use session 
     @GetMapping("/debug-session")
     public ResponseEntity<String> debugSession(HttpServletRequest request) {
-        HttpSession session = request.getSession(false); // Don't create a new session if it doesn't exist
+        HttpSession session = request.getSession(false); 
         if (session == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No active session found.");
         }
