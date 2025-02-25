@@ -15,13 +15,13 @@ public class JwtService {
 	@Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
+    private static final long EXPIRATION_TIME = 1000 * 60 * 60; 
 
-    // ✅ Securely generate the signing key
+    
     private Key getSigningKey() {
         try {
-            byte[] keyBytes = Base64.getDecoder().decode(SECRET_KEY); // Decode Base64 key
-            return Keys.hmacShaKeyFor(keyBytes); // Use secure key
+            byte[] keyBytes = Base64.getDecoder().decode(SECRET_KEY); 
+            return Keys.hmacShaKeyFor(keyBytes); 
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Invalid JWT Secret Key. Ensure it's properly Base64 encoded.", e);
         }
@@ -33,7 +33,7 @@ public class JwtService {
                 .claim("roles", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256) // ✅ Uses secure key
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256) 
                 .compact();
     }
 
@@ -56,7 +56,7 @@ public class JwtService {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(getSigningKey()) // ✅ Use secure key
+                .setSigningKey(getSigningKey()) 
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
