@@ -58,7 +58,7 @@ public class WaterLineController {
     }
 
     
-    // Get all water lines for the current admin (teacher)
+    // Get all water lines for the current admin 
     @GetMapping
     public ResponseEntity<List<WaterLine>> getWaterLines() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -68,11 +68,11 @@ public class WaterLineController {
         if ("ROLE_ADMIN".equals(user.getRole())) {
             adminId = user.getId();
         } else {
-            // For students, use the admin's id if available
+            // For ROLE_USER, use the admin's id if available
             adminId = (user.getAdmin() != null) ? user.getAdmin().getId() : user.getId();
         }
         
-        // For this example, we assume the current user is the admin
+        // current user is the admin
         List<WaterLine> lines = waterLineRepository.findByAdminId(adminId);
         return ResponseEntity.ok(lines);
     }
@@ -101,10 +101,9 @@ public class WaterLineController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User currentUser = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        // You may also check if the current user is allowed to delete this record
+        
         waterLineRepository.deleteById(id);
         return ResponseEntity.ok("Water line deleted successfully");
     }
 
-    // Additional endpoints (update, delete) can be added here if needed
 }
