@@ -36,7 +36,7 @@ import java.util.Date;
 	    public Tree updateTree(Long adminId, Long treeId, Tree updatedTree) {
 	        return treeRepository.findById(treeId).map(tree -> {
 	            if (tree.getAdminId().equals(adminId)) {
-	                tree.setName(updatedTree.getName()); // Now properly updates species
+	                tree.setName(updatedTree.getName()); 
 	                if (updatedTree.getLocation() != null 
 	                        && !updatedTree.getLocation().trim().isEmpty()
 	                        && updatedTree.getLocation().contains(",")) {
@@ -48,7 +48,6 @@ import java.util.Date;
 	                                tree.setLocation(updatedTree.getLocation());
 	                            } catch (NumberFormatException e) {
 	                                System.err.println("Invalid location numbers: " + updatedTree.getLocation());
-	                                // Optionally, you could skip updating or set a default value here.
 	                            }
 	                        }
 	                    }
@@ -79,11 +78,9 @@ import java.util.Date;
 	    
 	    public void updateTreeCareSchedules(Tree tree) {
 	        if (tree.getLastWateringDate() != null && tree.getLastFertilizationDate() != null) {
-	            // Convert Date to LocalDate
 	            LocalDate lastWateredLocalDate = tree.getLastWateringDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	            LocalDate lastFertilizedLocalDate = tree.getLastFertilizationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-	            // Use plusDays(), plusWeeks(), plusMonths() on LocalDate
 	            LocalDate nextWateringLocalDate;
 	            LocalDate nextFertilizationLocalDate;
 
@@ -95,7 +92,6 @@ import java.util.Date;
 	                nextFertilizationLocalDate = lastFertilizedLocalDate.plusMonths(1);
 	            }
 
-	            // Convert LocalDate back to Date
 	            tree.setNextWateringDate(Date.from(nextWateringLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 	            tree.setNextFertilizationDate(Date.from(nextFertilizationLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 
