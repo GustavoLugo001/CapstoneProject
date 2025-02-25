@@ -58,7 +58,6 @@ public class WaterLineController {
     }
 
     
-    // Get all water lines for the current admin 
     @GetMapping
     public ResponseEntity<List<WaterLine>> getWaterLines() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
