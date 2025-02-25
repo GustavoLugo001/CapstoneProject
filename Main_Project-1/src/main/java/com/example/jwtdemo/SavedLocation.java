@@ -16,7 +16,6 @@ public class SavedLocation {
     @Column(nullable = false)
     private String name;
     
-    // Store the location as a point in text format (e.g., "lat, lon") or GeoJSON
     @Column(nullable = false)
     private String location;
     
@@ -75,6 +74,5 @@ public class SavedLocation {
 		this.description = description;
 	}
     
-    // Getters and setters...
     
 }
