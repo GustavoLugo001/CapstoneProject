@@ -45,14 +45,14 @@ public class Tree {
     private Date nextWateringDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "last_watering_date") // or "last_watering_date" if that's your choice
-    private Date lastWateringDate; // tree was last watered
+    @Column(name = "last_watering_date") 
+    private Date lastWateringDate; 
     
     @Column(name = "species", nullable = false)
     private String species; 
 
     @Column(name = "health_status", nullable = false)
-    private String healthStatus; // e.g., Healthy, Diseased
+    private String healthStatus; 
 
     @Column(name = "latitude", nullable = false)
     private Double latitude;
@@ -61,7 +61,7 @@ public class Tree {
     private Double longitude;
 
     @Column(name = "height")
-    private Float height; // Height of the tree in meters
+    private Float height; 
 
     @Column(name = "soil_moisture_level")
     private Float soilMoistureLevel;
@@ -90,7 +90,6 @@ public class Tree {
     }
 
 
-    // Getter and Setter for plantingDate
     public Date getPlantingDate() {
         return plantingDate;
     }
@@ -104,7 +103,6 @@ public class Tree {
     @JsonIgnore
     private User owner; 
 
-    // Getters and Setters for other fields
 
     public Boolean getUserHasPermission() {
         return userHasPermission;
@@ -219,7 +217,6 @@ public class Tree {
         this.species = name;
     }
 
-    // If you want to support setting location via a single string (e.g. "lat, lng")
     public void setLocation(String location) {
         if (location != null && location.contains(",")) {
             String[] parts = location.split(",");
