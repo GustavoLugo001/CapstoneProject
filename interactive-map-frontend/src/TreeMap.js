@@ -43,11 +43,9 @@ function MapClickHandler({ mode, setNewTreePosition, setCurrentLineCoords, setNe
     click(e) {
       
       const { lat, lng } = e.latlng;
-      // Based on the mode, decide what to do with the click
       if (mode === "tree") {
         setNewTreePosition({ latitude: lat, longitude: lng });
       } else if (mode === "water" || mode === "electrical") {
-        // Add the clicked point to our line coords array
         setCurrentLineCoords((prev) => [...prev.map((p) => [...p]), [lat, lng]]);
       } else if (mode === "location") {
         setNewLocationPosition({ latitude: lat, longitude: lng });
@@ -62,21 +60,20 @@ function MapClickHandler({ mode, setNewTreePosition, setCurrentLineCoords, setNe
 const TreeMap = () => {
   // ===========================
   // State for all data
-  // ===========================
+
   const [trees, setTrees] = useState([]);
   const [waterLines, setWaterLines] = useState([]);
   const [electricalLines, setElectricalLines] = useState([]);
   const [savedLocations, setSavedLocations] = useState([]);
 
   // ===========================
-  // State for single-layer "mode"
-  // ===========================
-  // e.g. "tree", "water", "electrical", "location"
+  // State for "mode"
+  
   const [mode, setMode] = useState("tree");
 
   // ===========================
   // Tree-related states
-  // ===========================
+  
   const [selectedTree, setSelectedTree] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -100,7 +97,7 @@ const TreeMap = () => {
 
   // ===========================
   // Water/Electrical line states
-  // ===========================
+  
   const [currentLineCoords, setCurrentLineCoords] = useState([]);
   const [newWaterLineName, setNewWaterLineName] = useState("");
   const [newWaterLineDescription, setNewWaterLineDescription] = useState("");
@@ -109,16 +106,15 @@ const TreeMap = () => {
 
   // ===========================
   // Saved locations
-  // ===========================
+  
   const [newLocationPosition, setNewLocationPosition] = useState(null);
   const [newSavedLocationName, setNewSavedLocationName] = useState("");
   const [newSavedLocationDescription, setNewSavedLocationDescription] = useState("");
 
   // ===========================
   // Effects
-  // ===========================
+  
   useEffect(() => {
-    // On mount, fetch all data
     (async () => {
       try {
         const treeData = await fetchTrees();
@@ -138,7 +134,6 @@ const TreeMap = () => {
     })();
   }, []);
 
-  // When a tree is selected, populate health fields
   useEffect(() => {
     if (selectedTree) {
       setSpecies(selectedTree.species);
@@ -151,12 +146,12 @@ const TreeMap = () => {
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   // ===========================
   // Mode switch UI
-  // ===========================
+  
   // const renderModeSwitch = () => (
   //   <div style={{ marginBottom: "10px" }}>
   //     <select value={mode} onChange={(e) => {
   //       setMode(e.target.value);
-  //       setCurrentLineCoords([]); // clear line coords whenever we switch modes
+  //       setCurrentLineCoords([]); 
   //     }}>
   //       <option value="tree">Add Tree</option>
   //       <option value="water">Add Water Line</option>
@@ -168,13 +163,13 @@ const TreeMap = () => {
 
   const handleUndoLastPoint = () => {
     if (currentLineCoords.length > 0) {
-      setCurrentLineCoords((prev) => prev.slice(0, -1)); // Removes last point
+      setCurrentLineCoords((prev) => prev.slice(0, -1)); 
     }
   };
   
   // ===========================
   // Add Tree
-  // ===========================
+  
   const handleAddTree = async () => {
     if (!newTreePosition) {
       alert("Click on the map to choose a location first!");
@@ -197,11 +192,9 @@ const TreeMap = () => {
     try {
       const result = await addTree(treeData);
       if (result) {
-        // Refresh trees
         const updated = await fetchTrees();
         setTrees(updated);
       }
-      // Clear form
       setNewTreePosition(null);
       setNewTreeSpecies("");
       setNewTreeHealthStatus("");
@@ -226,7 +219,7 @@ const TreeMap = () => {
 
   // ===========================
   // Water Line
-  // ===========================
+  
   const handleAddWaterLine = async () => {
     if (currentLineCoords.length < 2) {
       alert("At least 2 points are required to form a line.");
@@ -245,7 +238,6 @@ const TreeMap = () => {
       await addWaterLine(payload);
       const updated = await fetchWaterLines();
       setWaterLines(updated);
-      // Clear
       setCurrentLineCoords([]);
       setNewWaterLineName("");
       setNewWaterLineDescription("");
@@ -266,7 +258,7 @@ const TreeMap = () => {
 
   // ===========================
   // Electrical Line
-  // ===========================
+  
   const handleAddElectricalLine = async () => {
     if (currentLineCoords.length < 2) {
       alert("At least 2 points are required to form a line.");
@@ -285,7 +277,6 @@ const TreeMap = () => {
       await addElectricalLine(payload);
       const updated = await fetchElectricalLines();
       setElectricalLines(updated);
-      // Clear
       setCurrentLineCoords([]);
       setNewElectricalLineName("");
       setNewElectricalLineDescription("");
@@ -306,7 +297,7 @@ const TreeMap = () => {
 
   // ===========================
   // Saved Location
-  // ===========================
+  
   const handleAddSavedLocation = async () => {
     if (!newLocationPosition || !newSavedLocationName.trim()) {
       alert("Pick a location on the map and enter a name.");
@@ -321,7 +312,6 @@ const TreeMap = () => {
       await addSavedLocation(payload);
       const updated = await fetchSavedLocations();
       setSavedLocations(updated);
-      // Clear
       setNewLocationPosition(null);
       setNewSavedLocationName("");
       setNewSavedLocationDescription("");
@@ -342,7 +332,7 @@ const TreeMap = () => {
 
   // ===========================
   // Update Tree Dates
-  // ===========================
+  
   const handleUpdateDates = async () => {
     if (!selectedTree) {
       alert("No tree selected!");
@@ -371,7 +361,7 @@ const TreeMap = () => {
 
   // ===========================
   // Health Info
-  // ===========================
+  
   const handleEditClick = () => setIsEditingHealth(true);
   const handleCancelClick = () => {
     if (selectedTree) {
@@ -407,7 +397,7 @@ const TreeMap = () => {
 
   // ===========================
   // AI Predictions
-  // ===========================
+  
   const fetchPredictions = async (treeId) => {
     setLoading(true);
     setError(null);
@@ -428,7 +418,7 @@ const TreeMap = () => {
 
   // ===========================
   // Tree circle coloring
-  // ===========================
+  
   const getCircleColor = (tree) => {
     if (tree.approvalStatus === "PENDING") {
       return "brown";
@@ -449,8 +439,10 @@ const TreeMap = () => {
       default:     return "green";
     }
   };
+
+ // ===================================
  // Approval / Denial Handlers for Trees
-  // ===========================
+  
   const handleApproveTree = async (treeId) => {
     try {
       const result = await approveTree(treeId);
@@ -475,7 +467,7 @@ const TreeMap = () => {
 
   // ===========================
   // Approval / Denial for Water Lines
-  // ===========================
+  
   const handleApproveWaterLine = async (lineId) => {
     try {
       const result = await approveWaterLine(lineId);
@@ -500,7 +492,7 @@ const TreeMap = () => {
 
   // ===========================
   // Approval / Denial for Electrical Lines
-  // ===========================
+
   const handleApproveElectricalLine = async (lineId) => {
     try {
       const result = await approveElectricalLine(lineId);
@@ -525,7 +517,7 @@ const TreeMap = () => {
 
   // ===========================
   // Approval / Denial for Saved Locations
-  // ===========================
+
   const handleApproveSavedLocation = async (locId) => {
     try {
       const result = await approveSavedLocation(locId);
@@ -549,7 +541,7 @@ const TreeMap = () => {
   };
   // ===========================
   // Renderers
-  // ===========================
+
   const renderTrees = () =>
     trees.map((tree) => (
       <Circle
@@ -687,7 +679,7 @@ const TreeMap = () => {
 
   // ===========================
   // Render
-  // ===========================
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <h2>📍 Map select mode to add </h2>
@@ -711,7 +703,7 @@ const TreeMap = () => {
           position: "absolute",
           top: "465px",
           left: "465px",
-          zIndex: 1000,  // Ensures it’s always on top
+          zIndex: 1000,  
           padding: "5px 10px",
           backgroundColor: "white",
           color: "purple",
@@ -852,14 +844,14 @@ const TreeMap = () => {
                 positions={currentLineCoords}
                 pathOptions={{
                   color: mode === "water" ? "blue" : "orange",
-                  dashArray: "5, 10", // 🔥 Dashed pattern for better visibility
+                  dashArray: "5, 10", 
                   weight: 4,
                   opacity: 0.8,
                 }}
               />
                <Circle
                     center={currentLineCoords[currentLineCoords.length - 1]}
-                    radius={2}  // 🔥 Small circle dot
+                    radius={2}  
                     pathOptions={{ color: "black", fillColor: "black", fillOpacity: 1 }}
                   />
                 </>
