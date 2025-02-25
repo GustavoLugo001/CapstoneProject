@@ -17,7 +17,7 @@ function getAuthHeaders() {
 
 // ---------------------------
 // Authentication and User Actions
-// ---------------------------
+
 export const login = async (username, password) => {
   try {
     const response = await axios.post(`${BASE_URL}/login`, { username, password });
@@ -47,7 +47,7 @@ export const register = async (userData) => {
 
 // ---------------------------
 // Trees
-// ---------------------------
+
 export async function fetchTrees() {
   const response = await fetch(`${BASE_URL}/trees`, {
     headers: { "Content-Type": "application/json", ...getAuthHeaders() },
@@ -101,7 +101,6 @@ export async function updateTree(treeId, updatedTree) {
   return response.json();
 }
 
-// Approval endpoints for Trees
 export async function approveTree(treeId) {
   const response = await fetch(`${BASE_URL}/trees/approve/${treeId}`, {
     method: "PUT",
@@ -126,7 +125,7 @@ export async function denyTree(treeId) {
 
 // ---------------------------
 // AI Predictions (Trees)
-// ---------------------------
+
 export async function predictTreeCare(tree_id) {
   const response = await fetch(`${FLASK_AI_URL}/predict_tree_care`, {
     method: "POST",
@@ -138,7 +137,7 @@ export async function predictTreeCare(tree_id) {
 
 // ---------------------------
 // Water Lines
-// ---------------------------
+
 export async function fetchWaterLines() {
   const response = await fetch(`${BASE_URL}/water-lines`, {
     headers: { "Content-Type": "application/json", ...getAuthHeaders() },
@@ -169,7 +168,6 @@ export async function deleteWaterLine(id) {
   return response.text();
 }
 
-// Approval endpoints for Water Lines
 export async function approveWaterLine(lineId) {
   const response = await fetch(`${BASE_URL}/water-lines/approve/${lineId}`, {
     method: "PUT",
@@ -194,7 +192,7 @@ export async function denyWaterLine(lineId) {
 
 // ---------------------------
 // Electrical Lines
-// ---------------------------
+
 export async function fetchElectricalLines() {
   const response = await fetch(`${BASE_URL}/electrical-lines`, {
     headers: { "Content-Type": "application/json", ...getAuthHeaders() },
@@ -225,7 +223,6 @@ export async function deleteElectricalLine(id) {
   return response.text();
 }
 
-// Approval endpoints for Electrical Lines
 export async function approveElectricalLine(lineId) {
   const response = await fetch(`${BASE_URL}/electrical-lines/approve/${lineId}`, {
     method: "PUT",
@@ -250,7 +247,7 @@ export async function denyElectricalLine(lineId) {
 
 // ---------------------------
 // Saved Locations
-// ---------------------------
+
 export async function fetchSavedLocations() {
   const response = await fetch(`${BASE_URL}/saved-locations`, {
     headers: { "Content-Type": "application/json", ...getAuthHeaders() },
@@ -281,7 +278,6 @@ export async function deleteSavedLocation(id) {
   return response.text();
 }
 
-// Approval endpoints for Saved Locations
 export async function approveSavedLocation(locationId) {
   const response = await fetch(`${BASE_URL}/saved-locations/approve/${locationId}`, {
     method: "PUT",
