@@ -7,11 +7,18 @@ To address this challenge, we propose the development of an interactive digital 
 
 ***To run:***
 
-**In order to run locally make sure that you enable HTTPS on browser
-**You will also require HTTPS token to actually work which is keystore.p12 to see the actual token it is combined perms I had to use this in order to make my React app work with https as well as a default.
-**So, make sure everything is in HTTPS and that front-end and back-end have the token which is the certification I self-certified so makes the site a threat which is why you enable HTTPS on browser. 
-**Application properties in src/main/resources contain most of the information for the connections as well as debug and ssl key. 
-**To actually run this program have back-end in eclipse and right click JwtDemoApplication.java got to Run As and select java application.
+1.In order to run locally make sure that you enable HTTPS on browser
+2.You will also require HTTPS token to actually work which is keystore.p12 to see the actual token it is combined perms I had to use this in order to make my React app work with https as well as a default.
+3.So, make sure everything is in HTTPS and that front-end and back-end have the token which is the certification I self-certified so makes the site a threat which is why you enable HTTPS on browser. 
+4.Application properties in src/main/resources contain most of the information for the connections as well as debug and ssl key. 
+5.To actually run this program have back-end in eclipse and right click JwtDemoApplication.java got to Run As and select java application.
+6.MySQL you will have to make sure you have the same information as the application properties as well as the tables also the database name which should be interact database interactive_map which all tables will be in and assure that the server is running. In my case I open MySQL enter the secure password and start
+7.To run flask-ai you will need to go into the interactive-map-frontend/flask-ai assure you are cd to it now run .\venv\Scripts\activate and finally python app.py 
+8.Now for React app open cmd aka the terminal  on window search bar cd to interactive-map-frontend then npm start now a web application will open up and the whole program will work 
+you will have to create an account but once doing so it shoudl look like so:
+![image](https://github.com/user-attachments/assets/83e16ee9-2860-4368-88a9-d2473cc3da92)
+
+
 
 ***Each Files goal/ task***
 
