@@ -36,7 +36,7 @@ To address this challenge, we propose the development of an interactive digital 
 
 
 
-you will have to create an account but once doing so it shoudl look like so:
+you will have to create an account but once doing so it should look like so:
 
 ![image](https://github.com/user-attachments/assets/83e16ee9-2860-4368-88a9-d2473cc3da92)
 
