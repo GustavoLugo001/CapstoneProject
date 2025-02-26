@@ -93,9 +93,7 @@ WaterLineRepository.java – (like electricalLineRepository.java just for waterl
 
 
 App.css – which is where the data 
-
 App.js – which is the main page of the login which can be customized but left normally for easier time. This mainly has the login, register, and logout
-
 Dashboard.js – which is the admin code as well as the role of the user that is logged in. 
 
 Login.js – is the login and of the user as well as the call of the api it will grab the username and password and if the login fails will be told, but if login works will then retrieve a token from 
