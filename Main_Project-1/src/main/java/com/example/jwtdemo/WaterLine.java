@@ -10,14 +10,12 @@ public class WaterLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    // Link the water line to an admin (teacher)
     @Column(name = "admin_id", nullable = false)
     private Long adminId;
     
     @Column(nullable = false)
     private String name;
     
-    // We'll store the line geometry as a string (e.g., as GeoJSON or a comma‑separated list of coordinates)
     @Column(name = "line_geometry", columnDefinition = "TEXT", nullable = false)
     private String lineGeometry;
     
@@ -35,7 +33,6 @@ public class WaterLine {
 	public void setApprovalStatus(String approvalStatus) {
 		this.approvalStatus = approvalStatus;
 	}
-    // Getters and Setters
     public Long getId() {
         return id;
     }

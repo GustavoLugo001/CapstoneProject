@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-import { login } from './api'; // named export from api.js
+import { login } from './api'; 
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -16,10 +16,9 @@ const Login = () => {
     try {
       const response = await login(username, password);
       if (response && response.token) {
-        // Save the token in localStorage
         localStorage.setItem('token', response.token);
         localStorage.setItem("userData", JSON.stringify(response));
-        // Redirect to the protected route (for example, "/trees")
+        
         navigate('/trees');
         navigate("/dashboard");
       } else {

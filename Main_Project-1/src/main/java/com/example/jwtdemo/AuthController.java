@@ -36,14 +36,16 @@ public class AuthController {
         this.jwtService = jwtService;
         this.userRepository = userRepository;
     }
+//test to assure that the back-end was function and security measures were not acting up.
     @GetMapping("/test")
     public String testEndpoint() {
         return "This is a public test endpoint.";
     }
 
+//This is not being used when trying to use session 
     @GetMapping("/debug-session")
     public ResponseEntity<String> debugSession(HttpServletRequest request) {
-        HttpSession session = request.getSession(false); // Don't create a new session if it doesn't exist
+        HttpSession session = request.getSession(false); 
         if (session == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No active session found.");
         }
@@ -94,7 +96,7 @@ public class AuthController {
 
         // Build the response
         Map<String, Object> response = new HashMap<>();
-        response.put("token", "Bearer " + token);  // Ensure Bearer prefix
+        response.put("token", "Bearer " + token);  
         response.put("role", user.getRole());
         response.put("username", user.getUsername());
 
@@ -128,7 +130,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body("❌ Invalid role. Must be 'ROLE_ADMIN' or 'ROLE_USER'.");
         }
 
-        // If registering as an admin, generate an admin code if not provided
+        // If registering as an admin generate an admin code if not provided
         if (role.equals("ROLE_ADMIN") && (adminCode == null || adminCode.isEmpty())) {
             adminCode = UUID.randomUUID().toString();
         }
@@ -153,12 +155,12 @@ public class AuthController {
         // Create new user
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password); // Keeping plaintext password as per your request
+        user.setPassword(password); 
         user.setEmail(email);
         user.setRole(role);
         user.setAdminCode(role.equals("ROLE_ADMIN") ? adminCode : null);
         if (role.equals("ROLE_USER")) {
-            user.setAdmin(admin); // Link user to admin
+            user.setAdmin(admin); 
         }
 
         userRepository.save(user);

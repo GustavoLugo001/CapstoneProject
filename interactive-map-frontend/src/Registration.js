@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { register } from "./api"; // ✅ Correct way to import register
+import { register } from "./api"; 
 
 const Registration = () => {
     const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ const Registration = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await register(formData); // ✅ Use register function correctly
+            const response = await register(formData); 
 
             if (response) {
                 setMessage("Registration successful!");

@@ -34,7 +34,6 @@ public class TreeController {
     
     @PostMapping
     public ResponseEntity<Tree> addTree(@RequestBody Tree tree) {
-        // Retrieve the current user from the JWT-based security context.
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByUsername(username)
                     .orElseThrow(() -> new RuntimeException("User not found"));
@@ -71,7 +70,7 @@ public class TreeController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if ("ROLE_ADMIN".equals(currentUser.getRole())) {
-            // For teachers: include trees created by the teacher and by their students
+            // For ROLE_ADMIN: include trees created by the teacher and by their ROLE_USER
             List<User> students = userRepository.findByAdminId(currentUser.getId());
             List<Long> ownerIds = new ArrayList<>();
             ownerIds.add(currentUser.getId());
@@ -81,7 +80,7 @@ public class TreeController {
             List<Tree> trees = treeRepository.findByOwnerIdIn(ownerIds);
             return ResponseEntity.ok(trees);
         } else {
-            // For students: return trees belonging to the student and to their admin (if available)
+            // For ROLE_USER: return trees belonging to the user and to their admin (if available)
             List<Long> ownerIds = new ArrayList<>();
             ownerIds.add(currentUser.getId());
             if (currentUser.getAdmin() != null) {
@@ -100,7 +99,6 @@ public class TreeController {
 
     @PutMapping("/{treeId}")
     public ResponseEntity<?> updateTree(@PathVariable Long treeId, @RequestBody Tree updatedTree) {
-        // Get the authenticated user's ID instead of relying on a request parameter
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByUsername(username)
                      .orElseThrow(() -> new RuntimeException("User not found"));
@@ -115,7 +113,6 @@ public class TreeController {
 
     @DeleteMapping("/{treeId}")
     public ResponseEntity<?> deleteTree(@PathVariable Long treeId) {
-        // Get the authenticated user's ID
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByUsername(username)
                      .orElseThrow(() -> new RuntimeException("User not found"));
@@ -166,20 +163,17 @@ public class TreeController {
         return ResponseEntity.ok("Tree denied!");
     }
     
-    // Endpoint to update watering and fertilization dates
     @PutMapping("/{treeId}/update-dates")
     public ResponseEntity<?> updateTreeDates(
         @PathVariable Long treeId,
         @RequestBody Map<String, Date> updates
     ) {
-        // Retrieve the current user from the security context
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Tree tree = treeService.getTreeById(treeId);
 
-        // Check if the user is the owner, an admin, or has been granted permission
         boolean isOwner = tree.getOwner().getId().equals(user.getId());
         boolean isAdmin = user.getRole().equals("ROLE_ADMIN");
         boolean hasPermission = Boolean.TRUE.equals(tree.getUserHasPermission());
@@ -197,7 +191,7 @@ public class TreeController {
             tree.setPlantingDate(updates.get("planting_date"));
         }
 
-        treeService.addTree(tree); // Save the updated tree
+        treeService.addTree(tree); 
 
         return ResponseEntity.ok("Dates updated successfully");
     }

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Registration from "./Registration";
 import TreeMap from "./TreeMap";
-import Logout from "./Logout"; // A simple logout component
+import Logout from "./Logout"; 
 import Dashboard from "./Dashboard";
 
 function App() {

@@ -2,6 +2,9 @@ package com.example.jwtdemo;
 
 import jakarta.persistence.*;
 
+//Here we have teh getters and setters for ElectricalLine.
+//electrical_lines is a table that electriline will set and get from  in order to connetc with the database.
+
 @Entity
 @Table(name = "electrical_lines")
 public class ElectricalLine {
