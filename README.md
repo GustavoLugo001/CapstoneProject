@@ -1,18 +1,18 @@
-Introduction
+***Introduction**
 Landowners play a crucial role in agriculture, forestry, and land management, but maintaining large parcels of land is time-consuming and complex. Traditional record-keeping methods, such as paper maps and manual logs, are prone to loss, errors, and inefficiency. Many landowners struggle with tracking tree locations, irrigation lines, and other infrastructure, leading to disorganization and mismanagement.
 To address this challenge, we propose the development of an interactive digital mapping system that allows landowners to digitally record, visualize, and manage their land assets. This platform incorporates Artificial Intelligence (AI) for predictive water and fertilization recommendations, helping users optimize resource use and increase agricultural efficiency.
 
 **Please keep in mind that this will only run locally but is set up to be putting official servers to run permanently.  
 
-To run:
+***To run:***
 **In order to run locally make sure that you enable HTTPS on browser
 **You will also require HTTPS token to actually work which is keystore.p12 to see the actual token it is combined perms I had to use this in order to make my React app work with https as well as a default.
 **So, make sure everything is in HTTPS and that front-end and back-end have the token which is the certification I self-certified so makes the site a threat which is why you enable HTTPS on browser. 
 **Application properties in src/main/resources contain most of the information for the connections as well as debug and ssl key. 
 **To actually run this program have back-end in eclipse and right click JwtDemoApplication.java got to Run As and select java application.
 
-Each Files goal/ task
-back-end:
+***Each Files goal/ task***
+**back-end:**
 AuthController.java – The task for this file is to allow Requesting Mapping which allows the call for specific directories. In the files you can see that the call will be /api now anything else for example /test must be called /api/test this allows the program to know specific files making it easier. Now this file contains login and register. The others while there were codes in order to assure my program was running they are not used and are there if they want to be used in more security measures.
 ElectricalLine.java – This file contains the getters and setters of ElectricalLine now they also grab the information from the table as well as set based on the table being called which in this case electrical_lines so we must identify which variables will represent the column to help.
 ElectricalLineController.java – The controller is again another RequestMapping which will be as /api/electrical-lines. Now in this we have 5 main functions approveElectricalLine which is simple it will assure whether the ROLE_ADMIN is placing the object if so then it will be APPORVED. denyElectricalLine which is the same concept it will grab the item and it will be determined if you want to deny. getElectricalLines which will be a list what its task is that it will going to the current user that has logged in and it will the see whether ROLE_ADMIN to get all that have the id if a ROLE_USER it will locate the admin_id and garb the Electrical Line. addElectricalLine which is the act of being able to put the object by doing so ROLE_ADMIN will be putting permissions to Approve and ROLE_USER will set everything to a pending but the object will then be added with the needed information. deleteElectricalLine which is simple it will locate the name of the Electrical Line and delete from table.  
@@ -35,7 +35,7 @@ WaterLine.java – getters and setters which call the get and set of table water
 WaterLineController.java – (like electricalLineController.java just for waterline)
 WaterLineRepository.java – (like electricalLineRepository.java just for waterline)
 
-Front-end:
+**Front-end:**
 App.css – which is where the data 
 App.js – which is the main page of the login which can be customized but left normally for easier time. This mainly has the login, register, and logout
 Dashboard.js – which is the admin code as well as the role of the user that is logged in. 
@@ -50,14 +50,14 @@ index.js – added by React app to start the local hosting
 logo.svg – added by React app
 reportWebVitals.js - added by React app
 
-Flask-ai:
+**Flask-ai:**
 app.py – is the main structure and will provide information regarding the user and provide the information and base it off the found sites and sources this is the flask 
 train_fertilization_model.py- is the structure of how the ai works and is utilized. 
 train_watering_model.py - is the structure of how the ai works and is utilized.
 update_tree_care.py – the ai that will use the base information and the user information and input what is more appropriate to the estimates. This will then show the fully tested data based on the estimated data and choose based on which is better.  
 The other files are made for the ai to work and the csv are simple but meant to help in estimating data of trees to get an average unfortunately I had to get from several sources and try to combine them in order for it to work in the method I needed. 
 
-MySQL:
+**MySQL:**
  contains all the great data with 5 tables 
 users - id, username, password, role, email, admin_code, admin_id
 trees - id, species, health_status, height, next_fertilization_date, owner_id, user_has_permission, last_watering_date, next_watering_date, last_fertilization_date, soil_moisture_level, temperature, humidity, planting_date, latitude, longitude, health_note, approval_status
