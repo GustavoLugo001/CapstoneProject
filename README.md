@@ -15,24 +15,29 @@ To address this challenge, we propose the development of an interactive digital 
 4.Application properties in src/main/resources contain most of the information for the connections as well as debug and ssl key. 
 
 5.To actually run this program have back-end in eclipse and right click JwtDemoApplication.java got to Run As and select java application.
+
 ![image](https://github.com/user-attachments/assets/b592b9b6-d721-4bf7-b1f5-0068194a9561)
 
 6.MySQL you will have to make sure you have the same information as the application properties as well as the tables also the database name which should be interact database interactive_map which all tables will be in and assure that the server is running. In my case I open MySQL enter the secure password and start. To make sure it is actually running go to server status and see if it is running make sure it is the right port.
+
 ![image](https://github.com/user-attachments/assets/518179d2-791b-47df-ba38-7a852e8588f0)
 ![image](https://github.com/user-attachments/assets/c6b13cd5-90ef-4cf3-9e82-d636dc1fea25)
 
 
 7.To run flask-ai you will need to go into the interactive-map-frontend/flask-ai assure you are cd to it now run .\venv\Scripts\activate  make sure that it shows (venv) PS and finally python app.py 
+
 ![image](https://github.com/user-attachments/assets/370d23eb-bc61-46d2-af67-9a624a197c82)
 
 
 8.Now for React app open cmd aka the terminal  on window search bar cd to interactive-map-frontend then npm start now a web application will open up and the whole program will work 
+
 ![image](https://github.com/user-attachments/assets/d34b8b1e-6cf7-4a3a-a096-3c35d12fab43)
 ![image](https://github.com/user-attachments/assets/03d81f11-2614-4697-badd-74bb71360bcd)
 
 
 
 you will have to create an account but once doing so it shoudl look like so:
+
 ![image](https://github.com/user-attachments/assets/83e16ee9-2860-4368-88a9-d2473cc3da92)
 
 
