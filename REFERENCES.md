@@ -31,6 +31,8 @@ Axios. (2021). Axios: Promise based HTTP client for the browser and node.js. Ret
 
 JSON Web Tokens. (2021). JWT.io: JSON Web Token Introduction. Retrieved from https://jwt.io/introduction
 
+OpenAI. (2023). ChatGPT (Version GPT-4) [Large language model]. https://openai.com/chatgpt
+
 OpenJS Foundation. (n.d.). React – A JavaScript library for building user interfaces. Retrieved from https://reactjs.org/
 
 Oracle. (n.d.). Java Persistence API (JPA) Specification. Retrieved from https://www.oracle.com/java/technologies/persistence-jsp.html
