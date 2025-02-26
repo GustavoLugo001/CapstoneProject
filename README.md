@@ -5,6 +5,8 @@ To address this challenge, we propose the development of an interactive digital 
 
 **Please keep in mind that this will only run locally but is set up to be putting official servers to run permanently.  
 
+**AI usage was used to help me created this program. 
+
 ***To run:***
 
 1.In order to run locally make sure that you enable HTTPS on browser
