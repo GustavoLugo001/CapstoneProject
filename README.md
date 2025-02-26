@@ -46,6 +46,7 @@ you will have to create an account but once doing so it should look like so:
 
 **back-end:**
 
+
 AuthController.java – The task for this file is to allow Requesting Mapping which allows the call for specific directories. In the files you can see that the call will be /api now anything else for example /test must be called /api/test this allows the program to know specific files making it easier. Now this file contains login and register. The others while there were codes in order to assure my program was running they are not used and are there if they want to be used in more security measures.
 
 ElectricalLine.java – This file contains the getters and setters of ElectricalLine now they also grab the information from the table as well as set based on the table being called which in this case electrical_lines so we must identify which variables will represent the column to help.
@@ -90,6 +91,7 @@ WaterLineRepository.java – (like electricalLineRepository.java just for waterl
 
 **Front-end:**
 
+
 App.css – which is where the data 
 
 App.js – which is the main page of the login which can be customized but left normally for easier time. This mainly has the login, register, and logout
@@ -118,6 +120,7 @@ reportWebVitals.js - added by React app
 
 **Flask-ai:**
 
+
 app.py – is the main structure and will provide information regarding the user and provide the information and base it off the found sites and sources this is the flask 
 
 train_fertilization_model.py- is the structure of how the ai works and is utilized. 
@@ -128,6 +131,7 @@ update_tree_care.py – the ai that will use the base information and the user i
 The other files are made for the ai to work and the csv are simple but meant to help in estimating data of trees to get an average unfortunately I had to get from several sources and try to combine them in order for it to work in the method I needed. 
 
 **MySQL:**
+
 
  contains all the great data with 5 tables 
 
