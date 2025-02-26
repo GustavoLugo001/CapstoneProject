@@ -113,16 +113,22 @@ public class TreeController {
 
     @DeleteMapping("/{treeId}")
     public ResponseEntity<?> deleteTree(@PathVariable Long treeId) {
+        // Get the authenticated user's ID
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByUsername(username)
                      .orElseThrow(() -> new RuntimeException("User not found"));
         
-        boolean deleted = treeService.deleteTree(user.getId(), treeId);
-        if (deleted) {
-            return ResponseEntity.ok("Tree deleted successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized to delete this tree");
-        }
+        treeRepository.deleteById(treeId);
+     // return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized to delete this tree");
+      return ResponseEntity.ok("Water line deleted successfully");
+
+
+//        boolean deleted = treeService.deleteTree(user.getId(), treeId);
+//        if (deleted) {
+//            return ResponseEntity.ok("Tree deleted successfully");
+//        } else {
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized to delete this tree");
+//        }
     }
 
     @PutMapping("/approve/{id}")
