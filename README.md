@@ -92,7 +92,8 @@ WaterLineRepository.java – (like electricalLineRepository.java just for waterl
 **Front-end:**
 
 
-App.css – which is where the data 
+App.css – which is where the data structer for the page is located.
+
 App.js – which is the main page of the login which can be customized but left normally for easier time. This mainly has the login, register, and logout
 Dashboard.js – which is the admin code as well as the role of the user that is logged in. 
 
