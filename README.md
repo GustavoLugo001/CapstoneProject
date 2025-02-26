@@ -78,15 +78,10 @@ TreeController.java - (does the same as ElectricalLineController.java just for t
 TreeRepository.java – which is to grab the information or update based on the Query 
 
 TreeService.java - which is more of a dive when the UpdateTree is called it will end up here and do the behind the scenes which is actually plugging it into the table such as deleteTree which removes from table , and updateTreeCareSchedules which is importing the date.
-
 User.java – getters and setters which will store and get from table users.
-
 UserRepository.java -  checking username and password as well as getting information regarding the query  based on the information.
-
 WaterLine.java – getters and setters which call the get and set of table water_line
-
 WaterLineController.java – (like electricalLineController.java just for waterline)
-
 WaterLineRepository.java – (like electricalLineRepository.java just for waterline)
 
 **Front-end:**
