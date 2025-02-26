@@ -37,29 +37,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         final String authHeader = request.getHeader("Authorization");
-        System.out.println("🔍 Authorization Header: " + authHeader);
+        System.out.println("Authorization Header: " + authHeader);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            System.out.println("⚠️ No JWT token found in request, skipping authentication.");
+            System.out.println("No JWT token found in request, skipping authentication.");
             filterChain.doFilter(request, response);
             return;
         }
-
+//double check all JWT code are working and being generated
         String jwt = authHeader.substring(7);
-        System.out.println("✅ Extracted JWT Token: " + jwt);
+        System.out.println("Extracted JWT Token: " + jwt);
 
         String username = jwtService.extractUsername(jwt);
-        System.out.println("✅ Extracted Username from JWT: " + username);
+        System.out.println("Extracted Username from JWT: " + username);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             User user = userRepository.findByUsername(username)
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
             String role = user.getRole();
-            System.out.println("✅ User Role Extracted: " + role);
+            System.out.println("User Role Extracted: " + role);
 
             if (jwtService.isTokenValid(jwt, username)) {
-                System.out.println("🚀 JWT is valid, setting authentication for: " + username);
+                System.out.println("JWT is valid, setting authentication for: " + username);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(username, null,
@@ -67,9 +67,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                System.out.println("✅ User authenticated! SecurityContext is now set.");
+                System.out.println("User authenticated! SecurityContext is now set.");
             } else {
-                System.out.println("❌ JWT is invalid.");
+                System.out.println("JWT is invalid.");
             }
         }
 
