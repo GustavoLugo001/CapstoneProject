@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
-
+ //and odd issues with teh program when working on it was that I had to have a JWT token for the porgram.
+//oddly why hasher has a translation for a token and due to that.
+//Bear was added in the front of the code as a way to allow it to function.
 @Service
 public class JwtService {
 
