@@ -49,7 +49,7 @@ public class TreeController {
             tree.setUserHasPermission(true);
         } else {
             tree.setApprovalStatus("PENDING");
-            tree.setUserHasPermission(false);
+            tree.setUserHasPermission(true);
         }
 
         if (tree.getLatitude() == null || tree.getLongitude() == null) {
