@@ -73,7 +73,8 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("message", "You have access!"));
     }
 
-    
+    //login was also being called, but was not saving session due to thsi assumption that maybe loginw as not being retained
+	//when checking it was the fact that session was delting itself due to securtiy of Spring tool. 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         String username = credentials.get("username");
@@ -113,7 +114,8 @@ public class AuthController {
 
 
 
-    
+    //there were issues with session due to spring tool, assumption was that registration was perhapse fault.
+//It was in reality due to the csrf.
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Map<String, String> requestBody) {
         String username = requestBody.get("username");
