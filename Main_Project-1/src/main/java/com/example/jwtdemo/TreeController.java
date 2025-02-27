@@ -99,18 +99,24 @@ public class TreeController {
 
     @PutMapping("/{treeId}")
     public ResponseEntity<?> updateTree(@PathVariable Long treeId, @RequestBody Tree updatedTree) {
+        // Get the authenticated user's ID instead of relying on a request parameter
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByUsername(username)
                      .orElseThrow(() -> new RuntimeException("User not found"));
-
-        Tree tree = treeService.updateTree(user.getId(), treeId, updatedTree);
+       // System.out.println("attempt for username: " + user.getAdmin().getUsername());
+        Tree tree = null;
+        if(user.getRole().equals("ROLE_USER")) {
+        tree = treeService.updateTree(user.getAdmin().getId(), treeId, updatedTree);
+        }else {
+        	tree = treeService.updateTree(user.getId(), treeId, updatedTree);
+        }
         if (tree != null) {
             return ResponseEntity.ok(tree);
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized to update this tree");
         }
     }
-
+    
     @DeleteMapping("/{treeId}")
     public ResponseEntity<?> deleteTree(@PathVariable Long treeId) {
         // Get the authenticated user's ID
