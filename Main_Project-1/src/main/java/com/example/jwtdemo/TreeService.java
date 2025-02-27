@@ -37,9 +37,7 @@ import java.util.Date;
 	        return treeRepository.findById(treeId).map(tree -> {
 	            if (tree.getAdminId().equals(adminId)) {
 	                tree.setName(updatedTree.getName()); 
-	                if (updatedTree.getLocation() != null 
-	                        && !updatedTree.getLocation().trim().isEmpty()
-	                        && updatedTree.getLocation().contains(",")) {
+	                if (updatedTree.getLocation() != null && !updatedTree.getLocation().trim().isEmpty()&& updatedTree.getLocation().contains(",")) {
 	                        String[] parts = updatedTree.getLocation().split(",");
 	                        if (parts.length == 2) {
 	                            try {
@@ -71,10 +69,10 @@ import java.util.Date;
 	    }
 
 
-	    public boolean userHasPermission(Long userId, Long treeId) {
-	        Integer count = treeRepository.countUserPermissions(userId, treeId);
-	        return count != null && count > 0;
-	    }
+	    // public boolean userHasPermission(Long userId, Long treeId) {
+	    //     Integer count = treeRepository.countUserPermissions(userId, treeId);
+	    //     return count != null && count > 0;
+	    // }
 	    
 	    public void updateTreeCareSchedules(Tree tree) {
 	        if (tree.getLastWateringDate() != null && tree.getLastFertilizationDate() != null) {
