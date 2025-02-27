@@ -38,7 +38,11 @@ public class TreeController {
         User user = userRepository.findByUsername(username)
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
-        tree.setOwner(user);
+         if(user.getRole().equals("ROLE_USER")){
+        tree.setOwner(user.getAdmin());
+        }else {
+        	tree.setOwner(user);
+        }
         
         if (user.getRole().equals("ROLE_ADMIN")) {
             tree.setApprovalStatus("APPROVED");
