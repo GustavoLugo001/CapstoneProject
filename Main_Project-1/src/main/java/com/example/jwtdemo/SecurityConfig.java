@@ -44,6 +44,22 @@ public class SecurityConfig {
         return authProvider;
     }
 
+    //This was honestly the most simple but most painful as it wa sthe ones I least exepcted to give me issues.
+    //The reasoning was that spring tool odlly has a security and because of that it was conflicting with my filter.
+    //another fact was disabling csrf was oddly notenough to stop it from working the same way.
+ // @Bean
+ //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+ //        http.csrf().disable()
+ //            .authorizeHttpRequests(auth -> auth
+ //                .requestMatchers("/api/test", "/api/create-account", "/api/login").permitAll()
+ //                .anyRequest().authenticated()
+ //            )
+ //            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) 
+ //            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); 
+ //        return http.build();
+ //    }
+
+    
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
