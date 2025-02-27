@@ -47,6 +47,8 @@ public class SecurityConfig {
     //This was honestly the most simple but most painful as it was the ones I least exepcted to give me issues.
     //The reasoning was that spring tool oddly has a security and because of that it was conflicting with my filter.
     //another fact was disabling csrf was oddly not enough to stop it from working the same way. I had to write it in a way that I still quiet undertsand.
+    //what made it more annoying wa sthat when the connection was allowed postman would say it was good but the session would be lost.
+    //
  // @Bean
  //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
  //        http.csrf().disable()
@@ -101,6 +103,10 @@ public class SecurityConfig {
         return NoOpPasswordEncoder.getInstance();
     }
 
+    //localhost is in https, which was a good thing as for also some reason my program refused to work under http.
+    //I had to convert everything to https and grab the key inorder to assure that my api.js had permission to run on https.
+    //another fact was FireFox has a setting that disbales http which was a major issue due to this and self certifiying myself with https.
+    //this led to many other issues. which was allowing my FireFox to enter once doing so however, the project seemed to be connected. 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
