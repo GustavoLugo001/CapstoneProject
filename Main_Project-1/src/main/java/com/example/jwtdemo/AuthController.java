@@ -127,16 +127,13 @@ public class AuthController {
         if (username == null || password == null || email == null) {
             return ResponseEntity.badRequest().body("❌ Username, password, and email are required.");
         }
-
         if (!role.equals("ROLE_ADMIN") && !role.equals("ROLE_USER")) {
             return ResponseEntity.badRequest().body("❌ Invalid role. Must be 'ROLE_ADMIN' or 'ROLE_USER'.");
         }
-
         // If registering as an admin generate an admin code if not provided
         if (role.equals("ROLE_ADMIN") && (adminCode == null || adminCode.isEmpty())) {
             adminCode = UUID.randomUUID().toString();
         }
-
         // Check for duplicate username or email
         if (userRepository.findByUsername(username).isPresent()) {
             return ResponseEntity.badRequest().body("❌ Username is already taken.");
@@ -144,7 +141,7 @@ public class AuthController {
         if (userRepository.findByEmail(email).isPresent()) {
             return ResponseEntity.badRequest().body("❌ Email is already in use.");
         }
-
+	    
         User admin = null;
         if (role.equals("ROLE_USER")) {
             if (adminCode == null || adminCode.isEmpty()) {
@@ -172,7 +169,25 @@ public class AuthController {
                 : "✅ User registered successfully.");
     }
 
-
+//These were attempts in order to deal with the csrf issue which resulted in no success.
+// @PostMapping("/create-account")
+//     public ResponseEntity<String> createAccount(@RequestBody AccountRequest accountRequest,@RequestParam String adminUsername,@RequestParam String accessCode) {
+//         try {
+//             User newUser = new User();
+//             newUser.setUsername(accountRequest.getUsername());
+//             newUser.setPassword(accountRequest.getPassword());
+//             newUser.setEmail(accountRequest.getEmail());
+//             newUser.setRoles(Set.of(accountRequest.getRole()));
+//             userService.addUser(newUser, adminUsername, accessCode);
+//             return ResponseEntity.status(HttpStatus.CREATED).body("Account created successfully");
+//         } catch (RuntimeException e) {
+//             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+//         }
+//     }
+//     @GetMapping("/api/test")
+//     public String test() {
+//         return "CSRF is disabled!";
+//     }
 
 
 
